@@ -7,6 +7,7 @@ from sys import stderr
 import json
 from datetime import datetime
 import re
+import logging
 
 
 try:
@@ -48,7 +49,10 @@ def discover_hypervisors(auth_url, tenant_name, username, password):
     print_json(hypervisors)
 
 if __name__ == '__main__':
-
+    logging.basicConfig(filename='/var/log/zabbix/openstack-discovery.log',level=logging.DEBUG)
+    # Debug the invocation, output to log file
+    logging.debug('Invoked with: %s', argv)
+  
     if (len(argv) != 6):    
         print """Usage: %s TYPE AUTH_URL TENANT USERNAME PASSWORD
           where
